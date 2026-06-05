@@ -112,6 +112,11 @@ export default function Portfolio() {
         .iconbtn:hover { transform: translateY(-3px) scale(1.06); box-shadow: 0 10px 26px rgba(124,58,237,.35); }
         .toplink { transition: transform .2s ease, opacity .2s ease; }
         .toplink:hover { transform: translateY(-3px); }
+        @keyframes breathe {
+          0%,100% { box-shadow: 0 0 8px 2px rgba(124,58,237,.35), 0 0 14px 4px rgba(250,204,21,.15); }
+          50%      { box-shadow: 0 0 22px 8px rgba(124,58,237,.65), 0 0 32px 12px rgba(250,204,21,.35); }
+        }
+        .chip-glow { animation: breathe 2.4s ease-in-out infinite; }
       `}</style>
 
       <button onClick={() => setTheme(isDark ? "light" : "dark")} style={{
@@ -146,8 +151,8 @@ export default function Portfolio() {
           </div>
 
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center" }}>
-            <InfoChip T={T} label="Experience" value={PROFILE.experience} />
-            <InfoChip T={T} label="Age" value={PROFILE.age} />
+            <InfoChip T={T} label="Experience" value={PROFILE.experience} highlight />
+            <InfoChip T={T} label="Age" value={PROFILE.age} highlight />
             <InfoChip T={T} label="Education" value={PROFILE.education} />
           </div>
 
@@ -292,10 +297,16 @@ export default function Portfolio() {
   );
 }
 
-function InfoChip({ T, label, value }) {
+function InfoChip({ T, label, value, highlight }) {
   return (
-    <div style={{ background: T.surface, border: `1px solid ${T.border}`, borderRadius: 14,
-      padding: "12px 18px", minWidth: 96 }}>
+    <div className={highlight ? "chip-glow" : ""} style={{
+      borderRadius: 14, padding: "12px 18px", minWidth: 96,
+      border: "2px solid transparent",
+      background: highlight
+        ? `linear-gradient(${T.surface}, ${T.surface}) padding-box, linear-gradient(135deg,#7C3AED,#FACC15) border-box`
+        : T.surface,
+      ...(highlight ? {} : { border: `1px solid ${T.border}` }),
+    }}>
       <div style={{ fontSize: 11, color: T.muted, letterSpacing: 1 }}>{label.toUpperCase()}</div>
       <div style={{ fontWeight: 700, fontSize: 16, marginTop: 2 }}>{value}</div>
     </div>

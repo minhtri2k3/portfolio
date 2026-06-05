@@ -187,7 +187,7 @@ export default function Portfolio() {
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center" }}>
             <InfoChip T={T} label="Experience" value={PROFILE.experience} highlight />
             <InfoChip T={T} label="Age" value={PROFILE.age} highlight />
-            <InfoChip T={T} label="Education" value={PROFILE.education} subtitle={PROFILE.major} logo={`${B}hcmiu-logo.png`} />
+            <InfoChip T={T} label="Education" value={PROFILE.education} subtitle={PROFILE.major} />
           </div>
 
           {/* contact icons */}

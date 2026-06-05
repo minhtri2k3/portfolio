@@ -26,10 +26,10 @@ const PROFILE = {
 };
 
 const FLUTTER_APPS = [
-  { icon: "🌤", name: "Weatherly", tag: "Minimal forecast app", shots: 3 },
-  { icon: "📒", name: "NoteFlow", tag: "Markdown notes + sync", shots: 3 },
-  { icon: "🏃", name: "PaceUp", tag: "Run tracker & stats", shots: 3 },
-  { icon: "💸", name: "Budgeto", tag: "Personal finance", shots: 3 },
+  { icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/3d/35/db/3d35dbee-6d16-cfa1-0d15-692cc702da6b/AppIcon-0-0-1x_U007emarketing-0-11-0-85-220.png/512x512bb.jpg", name: "Cleanie", tag: "Phone Storage Cleaner", shots: 3, url: "https://apps.apple.com/vn/app/cleanie-phone-storage-cleaner/id6511237599" },
+  { icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/7a/11/a9/7a11a99f-4cf5-7d06-899e-110c963af427/AppIcon-0-0-1x_U007emarketing-0-11-0-85-220.png/512x512bb.jpg", name: "Alobo", tag: "Sports facility manager", shots: 3, url: "https://apps.apple.com/us/app/alobo-qu%E1%BA%A3n-l%C3%BD-s%C3%A2n-th%E1%BB%83-thao/id6479625204" },
+  { icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/36/c0/95/36c09570-e98a-f6a5-a528-6471be627c6b/AppIcon-0-0-1x_U007epad-0-11-0-85-220.png/512x512bb.jpg", name: "Vườn Tâm Bách Việt", tag: "Community & education", shots: 3, url: "https://apps.apple.com/vn/app/v%C6%B0%E1%BB%9Dn-t%C3%A2m-b%C3%A1ch-vi%E1%BB%87t/id6503827968" },
+  { icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/50/b8/fa/50b8fa99-74cf-6028-f3c5-eee08ead1dbe/AppIcon-0-0-1x_U007ephone-0-11-0-85-220.png/512x512bb.jpg", name: "Bửu Tòa Hoàng Cơ", tag: "Spiritual learning platform", shots: 3, url: "https://apps.apple.com/vn/app/b%E1%BB%ADu-t%C3%B2a-ho%C3%A0ng-c%C6%A1-nh%C6%B0-nhi%C3%AAn/id6736351145" },
 ];
 
 const AI_PROJECTS = [
@@ -180,13 +180,12 @@ export default function Portfolio() {
             {FLUTTER_APPS.map((a, i) => (
               <div key={a.name} className="card rise" style={{ ...cardStyle(T), animationDelay: `${.1 + i * .08}s` }}>
                 <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
-                  <div style={{ width: 56, height: 56, borderRadius: 14, background: BLUE,
-                    display: "grid", placeItems: "center", fontSize: 26 }}>{a.icon}</div>
+                  <img src={a.icon} alt={a.name} style={{ width: 56, height: 56, borderRadius: 14, objectFit: "cover", flexShrink: 0 }} />
                   <div style={{ flex: 1 }}>
                     <div style={{ fontWeight: 700, fontSize: 17 }}>{a.name}</div>
                     <div style={{ color: T.muted, fontSize: 13 }}>{a.tag}</div>
                   </div>
-                  <button style={cta(BLUE)}>Get</button>
+                  <a href={a.url} target="_blank" rel="noreferrer" style={cta(BLUE)}>Get</a>
                 </div>
                 <div style={{ display: "flex", gap: 10, marginTop: 14, overflowX: "auto", paddingBottom: 4 }}>
                   {Array.from({ length: a.shots }).map((_, s) => (

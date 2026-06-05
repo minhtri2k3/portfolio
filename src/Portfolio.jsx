@@ -89,6 +89,15 @@ const EXPERIENCE = [
     cover: `${B}experience/smartosc/cover.jpg`,
     accent: "#2E8BFF",
   },
+  {
+    company: "Freelance",
+    location: "Ho Chi Minh City, Vietnam",
+    role: "Offshore Outsourcing Developer",
+    desc: "Took on offshore outsourcing contracts as a student — building mobile applications for pagodas and individual clients. Led a small team to gather client requirements, break down and assign tasks, and deliver published apps to the App Store.",
+    tags: ["Flutter", "Dart", "Team Lead", "Client Management", "App Store"],
+    cover: `${B}experience/freelance/cover.jpg`,
+    accent: "#F59E0B",
+  },
 ];
 
 const BLUE = "linear-gradient(135deg,#2E8BFF 0%,#6FB1FF 50%,#00D4FF 100%)";

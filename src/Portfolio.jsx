@@ -12,7 +12,8 @@ const PROFILE = {
   avatar: "🧑‍💻",
   experience: "2 yrs",
   age: 22,
-  education: "B.Sc. Computer Science",
+  education: "International University – HCMIU",
+  major: "Information Technology",
   talent: [
     { num: "5", label: "apps on Store" },
     { num: "4", label: "years university" },
@@ -153,7 +154,7 @@ export default function Portfolio() {
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center" }}>
             <InfoChip T={T} label="Experience" value={PROFILE.experience} highlight />
             <InfoChip T={T} label="Age" value={PROFILE.age} highlight />
-            <InfoChip T={T} label="Education" value={PROFILE.education} />
+            <InfoChip T={T} label="Education" value={PROFILE.education} subtitle={PROFILE.major} logo={`${B}hcmiu-logo.png`} />
           </div>
 
           {/* contact icons */}
@@ -297,7 +298,7 @@ export default function Portfolio() {
   );
 }
 
-function InfoChip({ T, label, value, highlight }) {
+function InfoChip({ T, label, value, highlight, logo, subtitle }) {
   return (
     <div className={highlight ? "chip-glow" : ""} style={{
       borderRadius: 14, padding: "12px 18px", minWidth: 96,
@@ -308,7 +309,11 @@ function InfoChip({ T, label, value, highlight }) {
       ...(highlight ? {} : { border: `1px solid ${T.border}` }),
     }}>
       <div style={{ fontSize: 11, color: T.muted, letterSpacing: 1 }}>{label.toUpperCase()}</div>
-      <div style={{ fontWeight: 700, fontSize: 16, marginTop: 2 }}>{value}</div>
+      {logo && (
+        <img src={logo} alt={value} style={{ height: 30, marginTop: 6, objectFit: "contain", display: "block" }} />
+      )}
+      <div style={{ fontWeight: 700, fontSize: logo ? 13 : 16, marginTop: 4 }}>{value}</div>
+      {subtitle && <div style={{ fontSize: 11, color: T.muted, marginTop: 2 }}>{subtitle}</div>}
     </div>
   );
 }

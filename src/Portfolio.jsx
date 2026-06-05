@@ -74,6 +74,8 @@ export default function Portfolio() {
     }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap');
+        *, *::before, *::after { box-sizing: border-box; }
+        html, body { margin: 0; padding: 0; }
         @keyframes floaty { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
         @keyframes pulseGlow { 0%,100%{box-shadow:0 0 0 0 rgba(46,139,255,.5)} 50%{box-shadow:0 0 0 18px rgba(46,139,255,0)} }
         @keyframes riseIn { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }

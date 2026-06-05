@@ -422,9 +422,10 @@ function ExperienceCard({ exp, T, index }) {
     <div className="rise card" style={{
       display: "grid", gridTemplateColumns: "1fr 1fr",
       borderRadius: 24, overflow: "hidden",
-      border: `1px solid ${T.border}`,
+      border: `1px solid ${exp.accent}55`,
       minHeight: 320,
       animationDelay: `${index * 0.15}s`,
+      boxShadow: `0 8px 40px ${exp.accent}44`,
     }}>
       {/* Left — company image */}
       <div style={{

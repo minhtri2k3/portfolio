@@ -25,17 +25,14 @@ const PROFILE = {
   email: "you@gmail.com",
 };
 
+const B = import.meta.env.BASE_URL;
+
 const FLUTTER_APPS = [
   {
     icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/3d/35/db/3d35dbee-6d16-cfa1-0d15-692cc702da6b/AppIcon-0-0-1x_U007emarketing-0-11-0-85-220.png/512x512bb.jpg",
     name: "Cleanie", tag: "Phone Storage Cleaner",
     url: "https://apps.apple.com/vn/app/cleanie-phone-storage-cleaner/id6511237599",
-    screenshots: [
-      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/0e/d9/b8/0ed9b850-8590-b9c7-e3c0-e70e10059196/785020be-e203-493c-a115-86c585a4cb00_5.5.png/392x696bb.png",
-      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/d9/61/08/d961082d-8789-d64e-d096-c5fab0273ba7/10063422-9a58-4ad9-9d46-a20181d6b4d2_5.5_2.png/392x696bb.png",
-      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/5f/bf/3c/5fbf3cfe-72d0-8837-cffc-2acccb831e2e/110d2544-6238-4c77-8234-c2ed05fbcbc3_5.5_3.png/392x696bb.png",
-      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/0b/0f/af/0b0faff9-2cf2-44ff-418a-9bd29780a55a/cb6b18af-afe5-4f3d-8cc3-e6c0f8b20bf7_5.5_4.png/392x696bb.png",
-    ],
+    screenshots: [1,2,3,4].map(n => `${B}screenshots/cleanie/${n}.png`),
   },
   {
     icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/7a/11/a9/7a11a99f-4cf5-7d06-899e-110c963af427/AppIcon-0-0-1x_U007emarketing-0-11-0-85-220.png/512x512bb.jpg",
@@ -47,12 +44,7 @@ const FLUTTER_APPS = [
     icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/36/c0/95/36c09570-e98a-f6a5-a528-6471be627c6b/AppIcon-0-0-1x_U007epad-0-11-0-85-220.png/512x512bb.jpg",
     name: "Vườn Tâm Bách Việt", tag: "Community & education",
     url: "https://apps.apple.com/vn/app/v%C6%B0%E1%BB%9Dn-t%C3%A2m-b%C3%A1ch-vi%E1%BB%87t/id6503827968",
-    screenshots: [
-      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/cc/82/2b/cc822b88-d486-9095-4491-96371b6d0634/f741cd8a-4df2-4733-af7d-dc7e168539a7_Simulator_Screenshot_-_iPhone_8_Plus_-_2024-06-21_at_16.43.58.png/392x696bb.png",
-      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/25/09/b1/2509b17d-6f7a-40cc-a46f-61e692de6ca6/e31012ab-2359-42fa-930b-aa6d81fc0872_Simulator_Screenshot_-_iPhone_8_Plus_-_2024-06-21_at_16.44.04.png/392x696bb.png",
-      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/45/dc/bb/45dcbb02-dcc4-af9c-ff89-7bdd2a3c2f4a/533dce39-c8e8-4902-9675-a39ce94f64c4_Simulator_Screenshot_-_iPhone_8_Plus_-_2024-06-21_at_16.44.35.png/392x696bb.png",
-      "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/3c/a4/65/3ca46583-2233-fb6c-b2ce-5766799f715b/012328c6-aeb4-405a-81bb-859747fe5c2f_Simulator_Screenshot_-_iPhone_8_Plus_-_2024-06-21_at_16.44.40.png/392x696bb.png",
-    ],
+    screenshots: [1,2,3,4].map(n => `${B}screenshots/vuon-tam-bach-viet/${n}.png`),
   },
   {
     icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/50/b8/fa/50b8fa99-74cf-6028-f3c5-eee08ead1dbe/AppIcon-0-0-1x_U007ephone-0-11-0-85-220.png/512x512bb.jpg",

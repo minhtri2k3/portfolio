@@ -17,7 +17,7 @@ const PROFILE = {
     { num: "5", label: "apps on Store" },
     { num: "4", label: "years university" },
     { num: "3", label: "international companies" },
-    { num: "2", label: "years experience" },
+    { num: "2", label: "MVPs built" },
     { num: "1", label: "rule: never quit once started" },
     { num: "0", label: "things impossible" },
   ],

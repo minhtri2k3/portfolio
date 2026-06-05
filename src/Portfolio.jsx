@@ -61,6 +61,39 @@ const AI_PROJECTS = [
   { tag: "NLP", name: "ToneShift", desc: "Style-transfer for text rewriting.", stack: ["Transformers", "PEFT"] },
 ];
 
+const EXPERIENCE = [
+  {
+    company: "Carrots",
+    location: "Barcelona, Spain",
+    role: "Project Owner · Junior Developer",
+    period: "2024 – Present",
+    desc: "Productions company based in Barcelona. Responsible for owning the full application — selecting tools, technologies, and architecture independently. Operated as a junior developer with full project ownership.",
+    tags: ["Flutter", "Dart", "Firebase", "Project Management"],
+    cover: `${B}experience/carrots/cover.jpg`,
+    accent: "#FF6B35",
+  },
+  {
+    company: "Alobo",
+    location: "Ho Chi Minh City, Vietnam",
+    role: "Flutter Developer",
+    period: "2023 – 2024",
+    desc: "Vietnamese sports facility booking platform with 300,000+ users across Vietnam. Worked under high pressure with 2-week Agile sprints and demanding Story Point targets.",
+    tags: ["Flutter", "Dart", "Agile", "Scrum", "Firebase"],
+    cover: `${B}experience/alobo/cover.jpg`,
+    accent: "#00C6FF",
+  },
+  {
+    company: "SmartOSC",
+    location: "Ho Chi Minh City, Vietnam",
+    role: "AI Engineer Intern",
+    period: "2024",
+    desc: "Interned on an AI RAG website project built with Flutter Web. Built both backend services and the AI pipeline end-to-end, then deployed the full MVP for the company.",
+    tags: ["Flutter Web", "Python", "RAG", "FastAPI", "LangChain"],
+    cover: `${B}experience/smartosc/cover.jpg`,
+    accent: "#7C3AED",
+  },
+];
+
 const BLUE = "linear-gradient(135deg,#2E8BFF 0%,#6FB1FF 50%,#00D4FF 100%)";
 const PURPLE = "linear-gradient(135deg,#7C3AED 0%,#A855F7 45%,#FACC15 100%)";
 const MIX = "linear-gradient(135deg,#2E8BFF 0%,#A855F7 60%,#FACC15 100%)";
@@ -286,6 +319,26 @@ export default function Portfolio() {
           background: MIX, fontSize: 22, boxShadow: "0 10px 26px rgba(124,58,237,.4)" }}>↑</button>
       </section>
 
+      {/* ===== PAGE 3: Experience ===== */}
+      <section style={{ background: T.bg, borderTop: `1px solid ${T.border}` }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "80px 24px 96px" }}>
+          <div className="rise" style={{ textAlign: "center", marginBottom: 60 }}>
+            <div style={{ fontSize: 12, letterSpacing: 4, fontWeight: 600, color: T.muted, marginBottom: 12 }}>
+              WORK EXPERIENCE
+            </div>
+            <h2 style={{ fontFamily: "Sora,sans-serif", fontSize: "clamp(28px,4vw,46px)", margin: 0 }}>
+              Where I've{" "}
+              <span style={{ background: MIX, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+                shipped
+              </span>
+            </h2>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 40 }}>
+            {EXPERIENCE.map((exp, i) => <ExperienceCard key={exp.company} exp={exp} T={T} index={i} />)}
+          </div>
+        </div>
+      </section>
+
       {/* ===== Footer ===== */}
       <footer style={{ textAlign: "center", padding: "22px 20px 30px", borderTop: `1px solid ${T.border}` }}>
         <div style={{ fontSize: 13, color: T.muted }}>
@@ -354,6 +407,69 @@ function SkillRow({ items, T, align = "left" }) {
         <span key={s} style={{ padding: "8px 14px", borderRadius: 999, fontSize: 13, fontWeight: 600,
           border: `1px solid ${T.border}`, background: T.surface }}>{s}</span>
       ))}
+    </div>
+  );
+}
+
+function ExperienceCard({ exp, T, index }) {
+  return (
+    <div className="rise card" style={{
+      display: "grid", gridTemplateColumns: "1fr 1fr",
+      borderRadius: 24, overflow: "hidden",
+      border: `1px solid ${T.border}`,
+      minHeight: 320,
+      animationDelay: `${index * 0.15}s`,
+    }}>
+      {/* Left — company image */}
+      <div style={{
+        position: "relative", overflow: "hidden",
+        background: `linear-gradient(135deg, ${exp.accent}44 0%, ${exp.accent}11 100%)`,
+        minHeight: 280,
+      }}>
+        <img src={exp.cover} alt={exp.company}
+          onError={(e) => { e.currentTarget.style.display = "none"; }}
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+        <div style={{
+          position: "absolute", inset: 0,
+          background: `linear-gradient(135deg, ${exp.accent}33 0%, transparent 60%)`,
+          pointerEvents: "none",
+        }} />
+        <div style={{
+          position: "absolute", bottom: 20, left: 20,
+          fontSize: 28, fontFamily: "Sora,sans-serif", fontWeight: 800,
+          color: "#fff", textShadow: "0 2px 12px rgba(0,0,0,.4)",
+          letterSpacing: -1,
+        }}>{exp.company}</div>
+      </div>
+
+      {/* Right — info */}
+      <div style={{
+        padding: "36px 32px", background: T.surface,
+        display: "flex", flexDirection: "column", justifyContent: "center", gap: 12,
+      }}>
+        <div style={{ fontSize: 11, letterSpacing: 2, fontWeight: 600, color: T.muted }}>
+          {exp.period} · {exp.location}
+        </div>
+        <div style={{
+          fontFamily: "Sora,sans-serif", fontSize: "clamp(18px,2vw,26px)", fontWeight: 700,
+          background: `linear-gradient(135deg,${exp.accent},#fff)`,
+          WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
+        }}>
+          {exp.role}
+        </div>
+        <p style={{ fontSize: 14, color: T.muted, lineHeight: 1.75, margin: 0 }}>
+          {exp.desc}
+        </p>
+        <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 4 }}>
+          {exp.tags.map(tag => (
+            <span key={tag} style={{
+              fontSize: 12, padding: "4px 12px", borderRadius: 999, fontWeight: 600,
+              border: `1px solid ${exp.accent}66`,
+              color: exp.accent, background: `${exp.accent}18`,
+            }}>{tag}</span>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

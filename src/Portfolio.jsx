@@ -15,9 +15,9 @@ const PROFILE = {
   education: "B.Sc. Computer Science",
   talent: [
     { num: "5", label: "apps on Store" },
-    { num: "4", label: "years learning" },
+    { num: "4", label: "years university" },
     { num: "3", label: "international companies" },
-    { num: "2", label: "MVPs built" },
+    { num: "2", label: "years experience" },
     { num: "1", label: "rule: never quit once started" },
     { num: "0", label: "things impossible" },
   ],

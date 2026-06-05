@@ -21,8 +21,8 @@ const PROFILE = {
     { num: "1", label: "rule: never quit once started" },
     { num: "0", label: "things impossible" },
   ],
-  linkedin: "https://linkedin.com/in/yourname",
-  email: "you@gmail.com",
+  linkedin: "https://www.linkedin.com/in/quang-minh-tri-nguyen-a4a942275/",
+  email: "quangminhtri2003@gmail.com",
 };
 
 const B = import.meta.env.BASE_URL;

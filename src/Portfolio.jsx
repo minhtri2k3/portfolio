@@ -66,7 +66,6 @@ const EXPERIENCE = [
     company: "Carrots",
     location: "Barcelona, Spain",
     role: "Project Owner · Junior Developer",
-    period: "2024 – Present",
     desc: "Productions company based in Barcelona. Responsible for owning the full application — selecting tools, technologies, and architecture independently. Operated as a junior developer with full project ownership.",
     tags: ["Flutter", "Dart", "Firebase", "Project Management"],
     cover: `${B}experience/carrots/cover.jpg`,
@@ -75,22 +74,20 @@ const EXPERIENCE = [
   {
     company: "Alobo",
     location: "Ho Chi Minh City, Vietnam",
-    role: "Flutter Developer",
-    period: "2023 – 2024",
+    role: "Junior Developer",
     desc: "Vietnamese sports facility booking platform with 300,000+ users across Vietnam. Worked under high pressure with 2-week Agile sprints and demanding Story Point targets.",
     tags: ["Flutter", "Dart", "Agile", "Scrum", "Firebase"],
     cover: `${B}experience/alobo/cover.jpg`,
-    accent: "#00C6FF",
+    accent: "#22C55E",
   },
   {
     company: "SmartOSC",
     location: "Ho Chi Minh City, Vietnam",
-    role: "AI Engineer Intern",
-    period: "2024",
+    role: "Flutter & AI Intern Developer",
     desc: "Interned on an AI RAG website project built with Flutter Web. Built both backend services and the AI pipeline end-to-end, then deployed the full MVP for the company.",
     tags: ["Flutter Web", "Python", "RAG", "FastAPI", "LangChain"],
     cover: `${B}experience/smartosc/cover.jpg`,
-    accent: "#7C3AED",
+    accent: "#2E8BFF",
   },
 ];
 
@@ -448,7 +445,7 @@ function ExperienceCard({ exp, T, index }) {
         display: "flex", flexDirection: "column", justifyContent: "center", gap: 12,
       }}>
         <div style={{ fontSize: 11, letterSpacing: 2, fontWeight: 600, color: T.muted }}>
-          {exp.period} · {exp.location}
+          {exp.location}
         </div>
         <div style={{
           fontFamily: "Sora,sans-serif", fontSize: "clamp(18px,2vw,26px)", fontWeight: 700,

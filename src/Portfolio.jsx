@@ -1,0 +1,357 @@
+import React, { useState, useRef, useCallback } from "react";
+
+// ============================================================
+// Portfolio — Split Reveal (Flutter Dev / AI Engineer)
+// Center info column is FIXED (never wiped). Wipe stage below.
+// Flutter side = blue gradient. AI side = purple→gold gradient.
+// Dark & light mode. Drag the ⇄ node to wipe.
+// ============================================================
+
+const PROFILE = {
+  name: "Your Name",
+  avatar: "🧑‍💻",
+  experience: "2 yrs",
+  age: 23,
+  education: "B.Sc. Computer Science",
+  talent: [
+    { num: "5", label: "apps on Store" },
+    { num: "4", label: "years learning" },
+    { num: "3", label: "international companies" },
+    { num: "2", label: "MVPs built" },
+    { num: "1", label: "rule: never quit once started" },
+    { num: "0", label: "things impossible" },
+  ],
+  linkedin: "https://linkedin.com/in/yourname",
+  email: "you@gmail.com",
+};
+
+const FLUTTER_APPS = [
+  { icon: "🌤", name: "Weatherly", tag: "Minimal forecast app", shots: 3 },
+  { icon: "📒", name: "NoteFlow", tag: "Markdown notes + sync", shots: 3 },
+  { icon: "🏃", name: "PaceUp", tag: "Run tracker & stats", shots: 3 },
+  { icon: "💸", name: "Budgeto", tag: "Personal finance", shots: 3 },
+];
+
+const AI_PROJECTS = [
+  { tag: "LLM", name: "DocChat RAG", desc: "Retrieval-augmented Q&A over PDFs.", stack: ["LangChain", "FAISS", "FastAPI"] },
+  { tag: "CV", name: "LeafScan", desc: "Plant disease classifier, 96% acc.", stack: ["PyTorch", "ONNX"] },
+  { tag: "NLP", name: "ToneShift", desc: "Style-transfer for text rewriting.", stack: ["Transformers", "PEFT"] },
+];
+
+const BLUE = "linear-gradient(135deg,#2E8BFF 0%,#6FB1FF 50%,#00D4FF 100%)";
+const PURPLE = "linear-gradient(135deg,#7C3AED 0%,#A855F7 45%,#FACC15 100%)";
+const MIX = "linear-gradient(135deg,#2E8BFF 0%,#A855F7 60%,#FACC15 100%)";
+
+export default function Portfolio() {
+  const [theme, setTheme] = useState("dark");
+  const [pos, setPos] = useState(50);
+  const [dragging, setDragging] = useState(false);
+  const stageRef = useRef(null);
+  const topRef = useRef(null);
+
+  const isDark = theme === "dark";
+  const T = isDark
+    ? { bg: "#0B1220", surface: "#141C2E", text: "#F1F5FB", muted: "#94A3B8", border: "#243044" }
+    : { bg: "#FFFFFF", surface: "#F4F7FB", text: "#0E1726", muted: "#5A6577", border: "#E2E8F0" };
+
+  const move = useCallback((clientX) => {
+    const el = stageRef.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    const p = ((clientX - r.left) / r.width) * 100;
+    setPos(Math.max(8, Math.min(92, p)));
+  }, []);
+  const onDown = (e) => { setDragging(true); move(e.touches ? e.touches[0].clientX : e.clientX); };
+  const onMove = (e) => { if (dragging) move(e.touches ? e.touches[0].clientX : e.clientX); };
+  const onUp = () => setDragging(false);
+  const scrollTop = () => topRef.current?.scrollIntoView({ behavior: "smooth" });
+
+  return (
+    <div ref={topRef} style={{
+      width: "100%", minHeight: "100vh", background: T.bg, color: T.text,
+      fontFamily: "'Space Grotesk', system-ui, sans-serif",
+      transition: "background .5s ease, color .5s ease",
+    }}>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap');
+        @keyframes floaty { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+        @keyframes pulseGlow { 0%,100%{box-shadow:0 0 0 0 rgba(46,139,255,.5)} 50%{box-shadow:0 0 0 18px rgba(46,139,255,0)} }
+        @keyframes riseIn { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+        @keyframes spinSlow { to{transform:rotate(360deg)} }
+        @keyframes countPop { 0%{opacity:0;transform:scale(.7)} 60%{transform:scale(1.08)} 100%{opacity:1;transform:scale(1)} }
+        .rise { animation: riseIn .7s cubic-bezier(.65,0,.35,1) both; }
+        .card { transition: transform .18s ease, box-shadow .18s ease; }
+        .card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(124,58,237,.22); }
+        .shot { transition: transform .25s ease; }
+        .shot:hover { transform: scale(1.04) rotate(-1deg); }
+        .iconbtn { transition: transform .18s ease, box-shadow .18s ease; }
+        .iconbtn:hover { transform: translateY(-3px) scale(1.06); box-shadow: 0 10px 26px rgba(124,58,237,.35); }
+        .toplink { transition: transform .2s ease, opacity .2s ease; }
+        .toplink:hover { transform: translateY(-3px); }
+      `}</style>
+
+      <button onClick={() => setTheme(isDark ? "light" : "dark")} style={{
+        position: "fixed", top: 20, right: 24, zIndex: 80, padding: "10px 16px",
+        borderRadius: 999, cursor: "pointer", border: `1px solid ${T.border}`,
+        background: T.surface, color: T.text, fontWeight: 600, fontSize: 14,
+      }}>{isDark ? "☀ Light" : "🌙 Dark"}</button>
+
+      {/* ===== TOP: fixed center info column ===== */}
+      <section style={{
+        minHeight: "100vh", display: "flex", flexDirection: "column",
+        alignItems: "center", justifyContent: "center", padding: "80px 20px 40px",
+        position: "relative", overflow: "hidden",
+      }}>
+        <div style={{ position: "absolute", width: 600, height: 600, borderRadius: "50%",
+          background: MIX, filter: "blur(140px)", opacity: isDark ? .18 : .12, top: "8%" }} />
+
+        <div className="rise" style={{ display: "flex", flexDirection: "column", alignItems: "center",
+          gap: 22, textAlign: "center", zIndex: 2 }}>
+
+          <div style={{ position: "relative", animation: "floaty 5s ease-in-out infinite" }}>
+            <div style={{ position: "absolute", inset: -6, borderRadius: "50%", background: MIX,
+              animation: "spinSlow 8s linear infinite" }} />
+            <div style={{ position: "relative", width: 124, height: 124, borderRadius: "50%",
+              background: T.surface, display: "grid", placeItems: "center", fontSize: 56,
+              border: `3px solid ${T.bg}` }}>{PROFILE.avatar}</div>
+          </div>
+
+          <div>
+            <h1 style={{ fontFamily: "Sora,sans-serif", fontSize: 34, margin: 0 }}>{PROFILE.name}</h1>
+            <p style={{ color: T.muted, margin: "6px 0 0" }}>Flutter Developer · AI Engineer</p>
+          </div>
+
+          <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center" }}>
+            <InfoChip T={T} label="Experience" value={PROFILE.experience} />
+            <InfoChip T={T} label="Age" value={PROFILE.age} />
+            <InfoChip T={T} label="Education" value={PROFILE.education} />
+          </div>
+
+          {/* contact icons */}
+          <div style={{ display: "flex", gap: 14 }}>
+            <a className="iconbtn" href={PROFILE.linkedin} target="_blank" rel="noreferrer"
+              title="LinkedIn" style={iconBtn("#0A66C2")}>
+              <LinkedInIcon />
+            </a>
+            <a className="iconbtn" href={`mailto:${PROFILE.email}`} title="Gmail" style={iconBtn(MIX)}>
+              <GmailIcon />
+            </a>
+          </div>
+
+          {/* Talent 5..0 */}
+          <div style={{ marginTop: 8 }}>
+            <div style={{ fontSize: 12, letterSpacing: 3, fontWeight: 600, color: T.muted, marginBottom: 14 }}>
+              TALENT IN NUMBERS
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 18, maxWidth: 560 }}>
+              {PROFILE.talent.map((t, i) => (
+                <div key={i} style={{ animation: `countPop .6s ease both`, animationDelay: `${.3 + i * .12}s` }}>
+                  <div style={{ fontFamily: "Sora,sans-serif", fontSize: 40, fontWeight: 800,
+                    background: MIX, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+                    {t.num}
+                  </div>
+                  <div style={{ fontSize: 12, color: T.muted, maxWidth: 150, margin: "0 auto" }}>{t.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div style={{ marginTop: 18, fontSize: 13, color: T.muted, animation: "floaty 3s ease-in-out infinite" }}>
+            ↓ explore my two worlds
+          </div>
+        </div>
+      </section>
+
+      {/* ===== LOWER: wipe stage ===== */}
+      <section
+        ref={stageRef}
+        onMouseMove={onMove} onMouseUp={onUp} onMouseLeave={onUp}
+        onTouchMove={onMove} onTouchEnd={onUp}
+        style={{ position: "relative", minHeight: "112vh", overflow: "hidden",
+          borderTop: `1px solid ${T.border}`, userSelect: dragging ? "none" : "auto" }}
+      >
+        <Panel side="left" pos={pos} dragging={dragging}>
+          <Hero grad={BLUE} kicker="FLUTTER DEVELOPER" title="I build" highlight="mobile apps"
+            sub="Shipping clean, fast Flutter apps to the App Store." />
+          <h3 style={h3(T)}>On the App Store</h3>
+          <div style={{ display: "grid", gap: 16 }}>
+            {FLUTTER_APPS.map((a, i) => (
+              <div key={a.name} className="card rise" style={{ ...cardStyle(T), animationDelay: `${.1 + i * .08}s` }}>
+                <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
+                  <div style={{ width: 56, height: 56, borderRadius: 14, background: BLUE,
+                    display: "grid", placeItems: "center", fontSize: 26 }}>{a.icon}</div>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontWeight: 700, fontSize: 17 }}>{a.name}</div>
+                    <div style={{ color: T.muted, fontSize: 13 }}>{a.tag}</div>
+                  </div>
+                  <button style={cta(BLUE)}>Get</button>
+                </div>
+                <div style={{ display: "flex", gap: 10, marginTop: 14, overflowX: "auto", paddingBottom: 4 }}>
+                  {Array.from({ length: a.shots }).map((_, s) => (
+                    <div key={s} className="shot" style={{ minWidth: 84, height: 168, borderRadius: 16, flexShrink: 0,
+                      background: `linear-gradient(160deg,${T.surface},${isDark ? "#1d2942" : "#dfeaff"})`,
+                      border: `1px solid ${T.border}` }} />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+          <SkillRow items={["Flutter", "Dart", "Riverpod", "Firebase"]} T={T} />
+        </Panel>
+
+        <Panel side="right" pos={pos} dragging={dragging}>
+          <Hero grad={PURPLE} align="right" kicker="AI ENGINEER" title="I build" highlight="intelligent systems"
+            sub="ML & LLM pipelines that turn data into product." />
+          <h3 style={{ ...h3(T), textAlign: "right" }}>Selected work</h3>
+          <div style={{ display: "grid", gap: 16 }}>
+            {AI_PROJECTS.map((p, i) => (
+              <div key={p.name} className="card rise" style={{ ...cardStyle(T), animationDelay: `${.1 + i * .08}s`, textAlign: "right",
+                boxShadow: "none" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+                  <span style={pill(PURPLE)}>{p.tag}</span>
+                  <span style={{ fontWeight: 700, fontSize: 17 }}>{p.name}</span>
+                </div>
+                <p style={{ color: T.muted, fontSize: 14, margin: "10px 0" }}>{p.desc}</p>
+                <div style={{ display: "flex", gap: 8, justifyContent: "flex-end", flexWrap: "wrap" }}>
+                  {p.stack.map((s) => (
+                    <span key={s} style={{ fontSize: 12, padding: "4px 10px", borderRadius: 999,
+                      border: `1px solid ${T.border}`, color: T.muted }}>{s}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+          <SkillRow align="right" items={["Python", "PyTorch", "LangChain", "FastAPI"]} T={T} />
+        </Panel>
+
+        <div style={{ position: "absolute", top: 0, bottom: 0, left: `${pos}%`, width: 2, background: MIX,
+          transform: "translateX(-50%)", zIndex: 40, boxShadow: "0 0 24px 4px rgba(124,58,237,.55)",
+          transition: dragging ? "none" : "left .5s cubic-bezier(.65,0,.35,1)" }} />
+        <div onMouseDown={onDown} onTouchStart={onDown} style={{
+          position: "absolute", top: "50%", left: `${pos}%`, zIndex: 50, transform: "translate(-50%,-50%)",
+          width: 72, height: 72, borderRadius: "50%", cursor: "grab", overflow: "hidden",
+          display: "flex", border: "3px solid #fff",
+          animation: "pulseGlow 2.4s ease-in-out infinite",
+          boxShadow: "0 8px 24px rgba(124,58,237,.4)",
+          transition: dragging ? "none" : "left .5s cubic-bezier(.65,0,.35,1)" }}>
+          {/* left half — Flutter */}
+          <div style={{ flex: 1, background: BLUE, display: "grid", placeItems: "center", paddingRight: 4 }}>
+            <FlutterIcon />
+          </div>
+          {/* right half — AI agent */}
+          <div style={{ flex: 1, background: PURPLE, display: "grid", placeItems: "center", paddingLeft: 4 }}>
+            <AgentIcon />
+          </div>
+        </div>
+
+        {/* back-to-top navigator */}
+        <button onClick={scrollTop} className="toplink" title="Back to intro" style={{
+          position: "fixed", bottom: 28, right: 28, zIndex: 70, width: 52, height: 52,
+          borderRadius: "50%", border: "none", cursor: "pointer", color: "#fff",
+          background: MIX, fontSize: 22, boxShadow: "0 10px 26px rgba(124,58,237,.4)" }}>↑</button>
+      </section>
+
+      {/* ===== Footer ===== */}
+      <footer style={{ textAlign: "center", padding: "22px 20px 30px", borderTop: `1px solid ${T.border}` }}>
+        <div style={{ fontSize: 13, color: T.muted }}>
+          © {new Date().getFullYear()} · Built with care by{" "}
+          <span style={{ fontWeight: 700, background: MIX, WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent" }}>Minh Tri</span>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
+function InfoChip({ T, label, value }) {
+  return (
+    <div style={{ background: T.surface, border: `1px solid ${T.border}`, borderRadius: 14,
+      padding: "12px 18px", minWidth: 96 }}>
+      <div style={{ fontSize: 11, color: T.muted, letterSpacing: 1 }}>{label.toUpperCase()}</div>
+      <div style={{ fontWeight: 700, fontSize: 16, marginTop: 2 }}>{value}</div>
+    </div>
+  );
+}
+
+function Panel({ side, pos, dragging, children }) {
+  const isLeft = side === "left";
+  const clip = isLeft
+    ? `polygon(0 0, ${pos}% 0, ${pos}% 100%, 0 100%)`
+    : `polygon(${pos}% 0, 100% 0, 100% 100%, ${pos}% 100%)`;
+  return (
+    <div style={{ position: "absolute", inset: 0, clipPath: clip, display: "flex", justifyContent: "center",
+      overflowY: "auto", padding: "80px 6% 220px",
+      transition: dragging ? "none" : "clip-path .5s cubic-bezier(.65,0,.35,1)" }}>
+      <div style={{ width: "100%", maxWidth: 560 }}>{children}</div>
+    </div>
+  );
+}
+
+function Hero({ kicker, title, highlight, sub, grad, align = "left" }) {
+  return (
+    <div className="rise" style={{ textAlign: align, marginBottom: 36 }}>
+      <div style={{ fontSize: 13, letterSpacing: 3, fontWeight: 600, opacity: .7 }}>{kicker}</div>
+      <h1 style={{ fontFamily: "Sora,sans-serif", fontSize: "clamp(26px,3.2vw,40px)", lineHeight: 1.1,
+        margin: "10px 0", whiteSpace: "nowrap" }}>
+        {title}{" "}
+        <span style={{ background: grad, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>{highlight}</span>
+      </h1>
+      <p style={{ opacity: .7, fontSize: 15, maxWidth: 420, marginLeft: align === "right" ? "auto" : 0 }}>{sub}</p>
+    </div>
+  );
+}
+
+function SkillRow({ items, T, align = "left" }) {
+  return (
+    <div style={{ display: "flex", gap: 10, flexWrap: "wrap", margin: "50px 0",
+      justifyContent: align === "right" ? "flex-end" : "flex-start" }}>
+      {items.map((s) => (
+        <span key={s} style={{ padding: "8px 14px", borderRadius: 999, fontSize: 13, fontWeight: 600,
+          border: `1px solid ${T.border}`, background: T.surface }}>{s}</span>
+      ))}
+    </div>
+  );
+}
+
+function FlutterIcon() {
+  // simple stylized Flutter chevron mark
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff">
+      <path d="M14.3 2L4 12.3l3.2 3.2L20.7 2zM14.3 11.6l-5.1 5.1 5.1 5.1h6.4l-5.1-5.1 5.1-5.1z"/>
+    </svg>
+  );
+}
+function AgentIcon() {
+  // simple robot/agent head
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="5" y="8" width="14" height="11" rx="3"/>
+      <path d="M12 4v4"/>
+      <circle cx="12" cy="4" r="1.4" fill="#fff"/>
+      <circle cx="9.5" cy="13" r="1.1" fill="#fff" stroke="none"/>
+      <circle cx="14.5" cy="13" r="1.1" fill="#fff" stroke="none"/>
+    </svg>
+  );
+}
+
+function LinkedInIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff">
+      <path d="M4.98 3.5A2.5 2.5 0 1 0 5 8.5a2.5 2.5 0 0 0-.02-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.3 0-2.95-1.8-2.95s-2.08 1.4-2.08 2.85V21H9z"/>
+    </svg>
+  );
+}
+function GmailIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff">
+      <path d="M2 5.5A1.5 1.5 0 0 1 3.5 4h17A1.5 1.5 0 0 1 22 5.5v13a1.5 1.5 0 0 1-1.5 1.5H3.5A1.5 1.5 0 0 1 2 18.5zM4 7.2v11h16v-11l-8 5.3z"/>
+    </svg>
+  );
+}
+
+const h3 = (T) => ({ fontFamily: "Sora,sans-serif", fontSize: 20, margin: "8px 0 18px", color: T.text });
+const cardStyle = (T) => ({ background: T.surface, border: `1px solid ${T.border}`, borderRadius: 18, padding: 18 });
+const cta = (grad) => ({ padding: "8px 18px", borderRadius: 999, border: "none", color: "#fff", background: grad, fontWeight: 700, cursor: "pointer", fontSize: 13 });
+const pill = (grad) => ({ fontSize: 11, fontWeight: 700, color: "#fff", padding: "4px 10px", borderRadius: 999, background: grad });
+const iconBtn = (bg) => ({ width: 46, height: 46, borderRadius: 14, background: bg, display: "grid",
+  placeItems: "center", textDecoration: "none", cursor: "pointer" });

@@ -11,7 +11,7 @@ const PROFILE = {
   name: "Your Name",
   avatar: "🧑‍💻",
   experience: "2 yrs",
-  age: 23,
+  age: 22,
   education: "B.Sc. Computer Science",
   talent: [
     { num: "5", label: "apps on Store" },

@@ -270,7 +270,11 @@ export default function Portfolio() {
               </div>
             ))}
           </div>
-          <SkillRow items={["Flutter", "Dart", "Riverpod", "Firebase"]} T={T} />
+          <div style={{ marginTop: 40, marginBottom: 50 }}>
+            <SkillGroup label="STATE MANAGEMENT" items={["Riverpod", "Provider", "Bloc", "MobX", "GetX"]} T={T} />
+            <SkillGroup label="FIREBASE" items={["Authentication", "Firestore", "Realtime Database", "Cloud Storage", "Cloud Messaging", "Crashlytics", "Analytics", "Remote Config", "Cloud Functions", "Performance Monitoring"]} T={T} />
+            <SkillGroup label="PROTOCOLS" items={["REST API", "WebSocket", "Socket.IO", "SSE"]} T={T} />
+          </div>
         </Panel>
 
         <Panel side="right" pos={pos} dragging={dragging}>
@@ -401,6 +405,22 @@ function Hero({ kicker, title, highlight, sub, grad, align = "left" }) {
         <span style={{ background: grad, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>{highlight}</span>
       </h1>
       <p style={{ opacity: .7, fontSize: 15, maxWidth: 420, marginLeft: align === "right" ? "auto" : 0 }}>{sub}</p>
+    </div>
+  );
+}
+
+function SkillGroup({ label, items, T, align = "left" }) {
+  return (
+    <div style={{ marginBottom: 18 }}>
+      <div style={{ fontSize: 10, letterSpacing: 2, fontWeight: 700, color: T.muted, marginBottom: 8 }}>
+        {label}
+      </div>
+      <div style={{ display: "flex", gap: 8, flexWrap: "wrap", justifyContent: align === "right" ? "flex-end" : "flex-start" }}>
+        {items.map(s => (
+          <span key={s} style={{ padding: "5px 12px", borderRadius: 999, fontSize: 12, fontWeight: 600,
+            border: `1px solid ${T.border}`, background: T.surface }}>{s}</span>
+        ))}
+      </div>
     </div>
   );
 }

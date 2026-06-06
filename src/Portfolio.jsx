@@ -84,7 +84,7 @@ const EXPERIENCE = [
     role: "Flutter & AI Intern Developer",
     desc: "Interned on an AI RAG website project built with Flutter Web. Built both backend services and the AI pipeline end-to-end, then deployed the full MVP for the company.",
     tags: ["Flutter Web", "Python", "RAG", "FastAPI", "LangChain"],
-    cover: `${B}experience/smartosc/cover.jpg`,
+    cover: `${B}experience/smartosc/cover.png`,
     accent: "#2E8BFF",
   },
   {

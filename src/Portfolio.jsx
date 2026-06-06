@@ -7,6 +7,8 @@ import React, { useState, useRef, useCallback } from "react";
 // Dark & light mode. Drag the ⇄ node to wipe.
 // ============================================================
 
+const B = import.meta.env.BASE_URL;
+
 const PROFILE = {
   name: "Nguyen Quang Minh Tri",
   avatar: `${B}avatar/avatar.jpg`,
@@ -25,8 +27,6 @@ const PROFILE = {
   linkedin: "https://www.linkedin.com/in/quang-minh-tri-nguyen-a4a942275/",
   email: "quangminhtri2003@gmail.com",
 };
-
-const B = import.meta.env.BASE_URL;
 
 const FLUTTER_APPS = [
   {

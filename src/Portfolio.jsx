@@ -39,7 +39,7 @@ const FLUTTER_APPS = [
     icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/7a/11/a9/7a11a99f-4cf5-7d06-899e-110c963af427/AppIcon-0-0-1x_U007emarketing-0-11-0-85-220.png/512x512bb.jpg",
     name: "Alobo", tag: "Sports facility manager",
     url: "https://apps.apple.com/us/app/alobo-qu%E1%BA%A3n-l%C3%BD-s%C3%A2n-th%E1%BB%83-thao/id6479625204",
-    screenshots: [],
+    screenshots: [`${B}screenshots/alobo/1.jpg`, `${B}screenshots/alobo/2.png`, `${B}screenshots/alobo/3.png`, `${B}screenshots/alobo/4.jpg`],
   },
   {
     icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/36/c0/95/36c09570-e98a-f6a5-a528-6471be627c6b/AppIcon-0-0-1x_U007epad-0-11-0-85-220.png/512x512bb.jpg",

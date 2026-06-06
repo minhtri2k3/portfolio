@@ -56,9 +56,7 @@ const FLUTTER_APPS = [
 ];
 
 const AI_PROJECTS = [
-  { tag: "LLM", name: "DocChat RAG", desc: "Retrieval-augmented Q&A over PDFs.", stack: ["LangChain", "FAISS", "FastAPI"] },
-  { tag: "CV", name: "LeafScan", desc: "Plant disease classifier, 96% acc.", stack: ["PyTorch", "ONNX"] },
-  { tag: "NLP", name: "ToneShift", desc: "Style-transfer for text rewriting.", stack: ["Transformers", "PEFT"] },
+  { tag: "RAG", name: "RAG for E-Commerce", desc: "Hybrid RAG pipeline for intelligent clothing suggestion — combining dense vector search with BM25 sparse retrieval and FashionCLIP embeddings for fashion-aware ranking.", stack: ["Hybrid RAG", "FashionCLIP", "BM25", "FastAPI", "SSE"] },
 ];
 
 const EXPERIENCE = [

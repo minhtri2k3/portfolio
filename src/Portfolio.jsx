@@ -8,8 +8,8 @@ import React, { useState, useRef, useCallback } from "react";
 // ============================================================
 
 const PROFILE = {
-  name: "Your Name",
-  avatar: "🧑‍💻",
+  name: "Nguyen Quang Minh Tri",
+  avatar: `${B}avatar/avatar.jpg`,
   experience: "2 yrs",
   age: 22,
   education: "International University – HCMIU",
@@ -51,7 +51,7 @@ const FLUTTER_APPS = [
     icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/50/b8/fa/50b8fa99-74cf-6028-f3c5-eee08ead1dbe/AppIcon-0-0-1x_U007ephone-0-11-0-85-220.png/512x512bb.jpg",
     name: "Bửu Tòa Hoàng Cơ", tag: "Spiritual learning platform",
     url: "https://apps.apple.com/vn/app/b%E1%BB%ADu-t%C3%B2a-ho%C3%A0ng-c%C6%A1-nh%C6%B0-nhi%C3%AAn/id6736351145",
-    screenshots: [],
+    screenshots: [`${B}screenshots/buu-toa-hoang-co/1.jpg`, `${B}screenshots/buu-toa-hoang-co/2.png`, `${B}screenshots/buu-toa-hoang-co/3.jpg`, `${B}screenshots/buu-toa-hoang-co/4.png`],
   },
 ];
 
@@ -181,8 +181,10 @@ export default function Portfolio() {
             <div style={{ position: "absolute", inset: -6, borderRadius: "50%", background: MIX,
               animation: "spinSlow 8s linear infinite" }} />
             <div style={{ position: "relative", width: 124, height: 124, borderRadius: "50%",
-              background: T.surface, display: "grid", placeItems: "center", fontSize: 56,
-              border: `3px solid ${T.bg}` }}>{PROFILE.avatar}</div>
+              overflow: "hidden", border: `3px solid ${T.bg}` }}>
+              <img src={PROFILE.avatar} alt="avatar"
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+            </div>
           </div>
 
           <div>

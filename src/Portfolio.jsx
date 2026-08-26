@@ -187,8 +187,8 @@ export default function Portfolio() {
           </div>
 
           <div>
-            <h1 style={{ fontFamily: "Sora,sans-serif", fontSize: 34, margin: 0 }}>{PROFILE.name}</h1>
-            <p style={{ color: T.muted, margin: "6px 0 0" }}>Flutter Developer · AI Engineer</p>
+            <h1 style={{ fontFamily: "Sora,sans-serif", fontSize: 51, margin: 0 }}>{PROFILE.name}</h1>
+            <p style={{ color: T.muted, margin: "6px 0 0", fontSize: 24 }}>Flutter Developer · AI Engineer</p>
           </div>
 
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", justifyContent: "center" }}>
@@ -210,23 +210,23 @@ export default function Portfolio() {
 
           {/* Talent 5..0 */}
           <div style={{ marginTop: 8 }}>
-            <div style={{ fontSize: 12, letterSpacing: 3, fontWeight: 600, color: T.muted, marginBottom: 14 }}>
+            <div style={{ fontSize: 18, letterSpacing: 3, fontWeight: 600, color: T.muted, marginBottom: 14 }}>
               TALENT IN NUMBERS
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 18, maxWidth: 560 }}>
               {PROFILE.talent.map((t, i) => (
                 <div key={i} style={{ animation: `countPop .6s ease both`, animationDelay: `${.3 + i * .12}s` }}>
-                  <div style={{ fontFamily: "Sora,sans-serif", fontSize: 40, fontWeight: 800,
+                  <div style={{ fontFamily: "Sora,sans-serif", fontSize: 60, fontWeight: 800,
                     background: MIX, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
                     {t.num}
                   </div>
-                  <div style={{ fontSize: 12, color: T.muted, maxWidth: 150, margin: "0 auto" }}>{t.label}</div>
+                  <div style={{ fontSize: 18, color: T.muted, maxWidth: 150, margin: "0 auto" }}>{t.label}</div>
                 </div>
               ))}
             </div>
           </div>
 
-          <div style={{ marginTop: 18, fontSize: 13, color: T.muted, animation: "floaty 3s ease-in-out infinite" }}>
+          <div style={{ marginTop: 18, fontSize: 20, color: T.muted, animation: "floaty 3s ease-in-out infinite" }}>
             ↓ explore my two worlds
           </div>
         </div>
@@ -372,12 +372,12 @@ function InfoChip({ T, label, value, highlight, logo, subtitle }) {
         : T.surface,
       ...(highlight ? {} : { border: `1px solid ${T.border}` }),
     }}>
-      <div style={{ fontSize: 11, color: T.muted, letterSpacing: 1 }}>{label.toUpperCase()}</div>
+      <div style={{ fontSize: 17, color: T.muted, letterSpacing: 1 }}>{label.toUpperCase()}</div>
       {logo && (
         <img src={logo} alt={value} style={{ height: 30, marginTop: 6, objectFit: "contain", display: "block" }} />
       )}
-      <div style={{ fontWeight: 700, fontSize: logo ? 13 : 16, marginTop: 4 }}>{value}</div>
-      {subtitle && <div style={{ fontSize: 11, color: T.muted, marginTop: 2 }}>{subtitle}</div>}
+      <div style={{ fontWeight: 700, fontSize: logo ? 20 : 24, marginTop: 4 }}>{value}</div>
+      {subtitle && <div style={{ fontSize: 17, color: T.muted, marginTop: 2 }}>{subtitle}</div>}
     </div>
   );
 }

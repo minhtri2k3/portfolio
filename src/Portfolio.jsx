@@ -37,6 +37,17 @@ const FLUTTER_APPS = [
     screenshots: [1,2,3,4].map(n => `${B}screenshots/cleanie/${n}.png`),
   },
   {
+    icon: "https://play-lh.googleusercontent.com/8D_T79UZv5-nXZORtNvJLyWFc7bianVgBm3Qwb4z6jaDmVY_LM3h7OUFN6iQ2XIam8_y3OEcnUIjJ5e4NGFi",
+    name: "Vietality", tag: "Health & fitness tracker",
+    url: "https://play.google.com/store/apps/details?id=com.vincentsoftware.vietality&hl=en",
+    screenshots: [
+      "https://play-lh.googleusercontent.com/MZu082wx2zhWfeajSb54wcflnhBe88VVOniT7O9bsRoE9WiKxSvBcLng4Syd3kvp26yIwGGeVxJdqx4JGmxFkJA",
+      "https://play-lh.googleusercontent.com/1PTcZbGxQbua6l7iHmBueDFyS1TuT0Oa5V-cIkJDvcz9fxQr_oiNk9tnCSPOkABzKAYd5hnuglJrvP9wPTtMYQ",
+      "https://play-lh.googleusercontent.com/4kX5KnFxuNmCIpx6Zt4RFjip_1eijOd6OYXulFk0411HTBb7ug8LqopW6JUricDl6-G41C6llNh3a5PZuCXM",
+      "https://play-lh.googleusercontent.com/Q1pU2rLkRFlp90_Gx-AXCrRgT5WBckvATimms-ULf7kWnRX0VvfX_UeCpc6ActhYwKmJEEvmbPNx_42eKl-U",
+    ],
+  },
+  {
     icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/7a/11/a9/7a11a99f-4cf5-7d06-899e-110c963af427/AppIcon-0-0-1x_U007emarketing-0-11-0-85-220.png/512x512bb.jpg",
     name: "Alobo", tag: "Sports facility manager",
     url: "https://apps.apple.com/us/app/alobo-qu%E1%BA%A3n-l%C3%BD-s%C3%A2n-th%E1%BB%83-thao/id6479625204",

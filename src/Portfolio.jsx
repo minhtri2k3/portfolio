@@ -115,7 +115,7 @@ const BLUE_ALT = "linear-gradient(135deg,#0A66C2 0%,#2E8BFF 48%,#38BDF8 100%)";
 const MIX = "linear-gradient(135deg,#0A66C2 0%,#2E8BFF 50%,#00D4FF 100%)";
 
 export default function Portfolio() {
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState("light");
   const [pos, setPos] = useState(50);
   const [dragging, setDragging] = useState(false);
   const stageRef = useRef(null);

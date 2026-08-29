@@ -3,7 +3,7 @@ import React, { useState, useRef, useCallback } from "react";
 // ============================================================
 // Portfolio — Split Reveal (Flutter Dev / AI Engineer)
 // Center info column is FIXED (never wiped). Wipe stage below.
-// Flutter side = blue gradient. AI side = purple→gold gradient.
+// Both specialisms share the primary blue visual system.
 // Dark & light mode. Drag the ⇄ node to wipe.
 // ============================================================
 
@@ -111,8 +111,8 @@ const EXPERIENCE = [
 ];
 
 const BLUE = "linear-gradient(135deg,#2E8BFF 0%,#6FB1FF 50%,#00D4FF 100%)";
-const PURPLE = "linear-gradient(135deg,#7C3AED 0%,#A855F7 45%,#FACC15 100%)";
-const MIX = "linear-gradient(135deg,#2E8BFF 0%,#A855F7 60%,#FACC15 100%)";
+const BLUE_ALT = "linear-gradient(135deg,#0A66C2 0%,#2E8BFF 48%,#38BDF8 100%)";
+const MIX = "linear-gradient(135deg,#0A66C2 0%,#2E8BFF 50%,#00D4FF 100%)";
 
 export default function Portfolio() {
   const [theme, setTheme] = useState("dark");
@@ -155,16 +155,16 @@ export default function Portfolio() {
         @keyframes countPop { 0%{opacity:0;transform:scale(.7)} 60%{transform:scale(1.08)} 100%{opacity:1;transform:scale(1)} }
         .rise { animation: riseIn .7s cubic-bezier(.65,0,.35,1) both; }
         .card { transition: transform .18s ease, box-shadow .18s ease; }
-        .card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(124,58,237,.22); }
+        .card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(46,139,255,.22); }
         .shot { transition: transform .25s ease; }
         .shot:hover { transform: scale(1.04) rotate(-1deg); }
         .iconbtn { transition: transform .18s ease, box-shadow .18s ease; }
-        .iconbtn:hover { transform: translateY(-3px) scale(1.06); box-shadow: 0 10px 26px rgba(124,58,237,.35); }
+        .iconbtn:hover { transform: translateY(-3px) scale(1.06); box-shadow: 0 10px 26px rgba(46,139,255,.35); }
         .toplink { transition: transform .2s ease, opacity .2s ease; }
         .toplink:hover { transform: translateY(-3px); }
         @keyframes breathe {
-          0%,100% { box-shadow: 0 0 8px 2px rgba(124,58,237,.35), 0 0 14px 4px rgba(250,204,21,.15); }
-          50%      { box-shadow: 0 0 22px 8px rgba(124,58,237,.65), 0 0 32px 12px rgba(250,204,21,.35); }
+          0%,100% { box-shadow: 0 0 8px 2px rgba(46,139,255,.35), 0 0 14px 4px rgba(0,212,255,.15); }
+          50%      { box-shadow: 0 0 22px 8px rgba(46,139,255,.65), 0 0 32px 12px rgba(0,212,255,.35); }
         }
         .chip-glow { animation: breathe 2.4s ease-in-out infinite; }
       `}</style>
@@ -290,7 +290,7 @@ export default function Portfolio() {
         </Panel>
 
         <Panel side="right" pos={pos} dragging={dragging}>
-          <Hero grad={PURPLE} align="right" kicker="AI ENGINEER" title="I build" highlight="intelligent systems"
+          <Hero grad={BLUE_ALT} align="right" kicker="AI ENGINEER" title="I build" highlight="intelligent systems"
             sub="ML & LLM pipelines that turn data into product." />
           <h3 style={{ ...h3(T), textAlign: "right" }}>Selected work</h3>
           <div style={{ display: "grid", gap: 16 }}>
@@ -298,7 +298,7 @@ export default function Portfolio() {
               <div key={p.name} className="card rise" style={{ ...cardStyle(T), animationDelay: `${.1 + i * .08}s`, textAlign: "right",
                 boxShadow: "none" }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-                  <span style={pill(PURPLE)}>{p.tag}</span>
+                  <span style={pill(BLUE_ALT)}>{p.tag}</span>
                   <span style={{ fontWeight: 700, fontSize: 17 }}>{p.name}</span>
                 </div>
                 <p style={{ color: T.muted, fontSize: 14, margin: "10px 0" }}>{p.desc}</p>
@@ -315,21 +315,21 @@ export default function Portfolio() {
         </Panel>
 
         <div style={{ position: "absolute", top: 0, bottom: 0, left: `${pos}%`, width: 2, background: MIX,
-          transform: "translateX(-50%)", zIndex: 40, boxShadow: "0 0 24px 4px rgba(124,58,237,.55)",
+          transform: "translateX(-50%)", zIndex: 40, boxShadow: "0 0 24px 4px rgba(46,139,255,.55)",
           transition: dragging ? "none" : "left .5s cubic-bezier(.65,0,.35,1)" }} />
         <div onMouseDown={onDown} onTouchStart={onDown} style={{
           position: "absolute", top: "50%", left: `${pos}%`, zIndex: 50, transform: "translate(-50%,-50%)",
           width: 72, height: 72, borderRadius: "50%", cursor: "grab", overflow: "hidden",
           display: "flex", border: "3px solid #fff",
           animation: "pulseGlow 2.4s ease-in-out infinite",
-          boxShadow: "0 8px 24px rgba(124,58,237,.4)",
+          boxShadow: "0 8px 24px rgba(46,139,255,.4)",
           transition: dragging ? "none" : "left .5s cubic-bezier(.65,0,.35,1)" }}>
           {/* left half — Flutter */}
           <div style={{ flex: 1, background: BLUE, display: "grid", placeItems: "center", paddingRight: 4 }}>
             <FlutterIcon />
           </div>
           {/* right half — AI agent */}
-          <div style={{ flex: 1, background: PURPLE, display: "grid", placeItems: "center", paddingLeft: 4 }}>
+          <div style={{ flex: 1, background: BLUE_ALT, display: "grid", placeItems: "center", paddingLeft: 4 }}>
             <AgentIcon />
           </div>
         </div>
@@ -338,7 +338,7 @@ export default function Portfolio() {
         <button onClick={scrollTop} className="toplink" title="Back to intro" style={{
           position: "fixed", bottom: 28, right: 28, zIndex: 70, width: 52, height: 52,
           borderRadius: "50%", border: "none", cursor: "pointer", color: "#fff",
-          background: MIX, fontSize: 22, boxShadow: "0 10px 26px rgba(124,58,237,.4)" }}>↑</button>
+          background: MIX, fontSize: 22, boxShadow: "0 10px 26px rgba(46,139,255,.4)" }}>↑</button>
       </section>
 
       {/* ===== PAGE 3: Experience ===== */}
@@ -379,7 +379,7 @@ function InfoChip({ T, label, value, highlight, logo, subtitle }) {
       borderRadius: 14, padding: "12px 18px", minWidth: 96,
       border: "2px solid transparent",
       background: highlight
-        ? `linear-gradient(${T.surface}, ${T.surface}) padding-box, linear-gradient(135deg,#7C3AED,#FACC15) border-box`
+        ? `linear-gradient(${T.surface}, ${T.surface}) padding-box, ${BLUE_ALT} border-box`
         : T.surface,
       ...(highlight ? {} : { border: `1px solid ${T.border}` }),
     }}>
@@ -400,9 +400,10 @@ function Panel({ side, pos, dragging, children }) {
     : `polygon(${pos}% 0, 100% 0, 100% 100%, ${pos}% 100%)`;
   return (
     <div style={{ position: "absolute", inset: 0, clipPath: clip, display: "flex", justifyContent: "center",
-      overflowY: "auto", padding: "80px 6% 220px",
+      overflowY: "auto", padding: "80px 2.5% 220px",
       transition: dragging ? "none" : "clip-path .5s cubic-bezier(.65,0,.35,1)" }}>
-      <div style={{ width: "100%", maxWidth: 560 }}>{children}</div>
+      {/* The page-two content is enlarged 30%; the narrower side padding lets it use more horizontal space. */}
+      <div style={{ width: "76.923%", maxWidth: 560, zoom: 1.3 }}>{children}</div>
     </div>
   );
 }

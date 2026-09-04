@@ -33,30 +33,35 @@ const FLUTTER_APPS = [
   {
     icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/3d/35/db/3d35dbee-6d16-cfa1-0d15-692cc702da6b/AppIcon-0-0-1x_U007emarketing-0-11-0-85-220.png/512x512bb.jpg",
     name: "Cleanie", tag: "Phone Storage Cleaner",
+    stores: ["appStore", "googlePlay"],
     url: "https://apps.apple.com/vn/app/cleanie-phone-storage-cleaner/id6511237599",
     screenshots: [1,2,3,4].map(n => `${B}screenshots/cleanie/${n}.png`),
   },
   {
     icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/7a/11/a9/7a11a99f-4cf5-7d06-899e-110c963af427/AppIcon-0-0-1x_U007emarketing-0-11-0-85-220.png/512x512bb.jpg",
     name: "Alobo", tag: "Sports facility manager",
+    stores: ["appStore", "googlePlay"],
     url: "https://apps.apple.com/us/app/alobo-qu%E1%BA%A3n-l%C3%BD-s%C3%A2n-th%E1%BB%83-thao/id6479625204",
     screenshots: [`${B}screenshots/alobo/1.jpg`, `${B}screenshots/alobo/2.png`, `${B}screenshots/alobo/3.png`, `${B}screenshots/alobo/4.jpg`],
   },
   {
     icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/36/c0/95/36c09570-e98a-f6a5-a528-6471be627c6b/AppIcon-0-0-1x_U007epad-0-11-0-85-220.png/512x512bb.jpg",
     name: "Vườn Tâm Bách Việt", tag: "Community & education",
+    stores: ["appStore"],
     url: "https://apps.apple.com/vn/app/v%C6%B0%E1%BB%9Dn-t%C3%A2m-b%C3%A1ch-vi%E1%BB%87t/id6503827968",
     screenshots: [1,2,3,4].map(n => `${B}screenshots/vuon-tam-bach-viet/${n}.png`),
   },
   {
     icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/50/b8/fa/50b8fa99-74cf-6028-f3c5-eee08ead1dbe/AppIcon-0-0-1x_U007ephone-0-11-0-85-220.png/512x512bb.jpg",
     name: "Bửu Tòa Hoàng Cơ", tag: "Spiritual learning platform",
+    stores: ["appStore", "googlePlay"],
     url: "https://apps.apple.com/vn/app/b%E1%BB%ADu-t%C3%B2a-ho%C3%A0ng-c%C6%A1-nh%C6%B0-nhi%C3%AAn/id6736351145",
     screenshots: [`${B}screenshots/buu-toa-hoang-co/1.jpg`, `${B}screenshots/buu-toa-hoang-co/2.png`, `${B}screenshots/buu-toa-hoang-co/3.jpg`, `${B}screenshots/buu-toa-hoang-co/4.png`],
   },
   {
     icon: "https://play-lh.googleusercontent.com/8D_T79UZv5-nXZORtNvJLyWFc7bianVgBm3Qwb4z6jaDmVY_LM3h7OUFN6iQ2XIam8_y3OEcnUIjJ5e4NGFi",
     name: "Vietality", tag: "Health & fitness tracker",
+    stores: ["appStore", "googlePlay"],
     url: "https://play.google.com/store/apps/details?id=com.vincentsoftware.vietality&hl=en",
     screenshots: [
       "https://play-lh.googleusercontent.com/MZu082wx2zhWfeajSb54wcflnhBe88VVOniT7O9bsRoE9WiKxSvBcLng4Syd3kvp26yIwGGeVxJdqx4JGmxFkJA",
@@ -68,11 +73,23 @@ const FLUTTER_APPS = [
   {
     icon: `${B}screenshots/youthconnect/icon.jpg`,
     name: "YouthConnect", tag: "Youth community & connection platform",
+    stores: ["appStore", "googlePlay"],
     url: "https://apps.apple.com/us/app/youthconnect/id6757994544",
     screenshots: [
       ...[1,2,3,4].map(n => `${B}screenshots/youthconnect/${n}.jpg`),
       ...[1,2,3,4].map(n => `${B}screenshots/youthconnect/ipad-${n}.jpg`),
     ],
+  },
+];
+
+const PORTFOLIO_KEYWORDS = [
+  {
+    label: "MOBILE ENGINEERING",
+    items: ["Flutter", "Dart", "Kotlin", "Riverpod", "BLoC", "iOS", "Android", "Firebase", "REST API", "WebSocket", "App Store Connect", "Google Play", "CI/CD", "Fastlane"],
+  },
+  {
+    label: "AI · AUTOMATION · LLM",
+    items: ["LLMs", "RAG", "Prompt Engineering", "AI Agents", "Agentic Workflows", "MCP", "Skills & Hooks", "Automation", "CLI Tools"],
   },
 ];
 
@@ -258,7 +275,10 @@ export default function Portfolio() {
                     <div style={{ fontWeight: 700, fontSize: 17 }}>{a.name}</div>
                     <div style={{ color: T.muted, fontSize: 13 }}>{a.tag}</div>
                   </div>
-                  <a href={a.url} target="_blank" rel="noreferrer" style={cta(BLUE)}>Get</a>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}>
+                    <StoreBadges stores={a.stores} T={T} />
+                    <a href={a.url} target="_blank" rel="noreferrer" style={{ ...cta(BLUE), textDecoration: "none" }}>Get</a>
+                  </div>
                 </div>
                 <div style={{ display: "flex", gap: 10, marginTop: 14, overflowX: "auto", paddingBottom: 4 }}>
                   {a.screenshots.map((src, s) => (
@@ -267,6 +287,21 @@ export default function Portfolio() {
                   ))}
                 </div>
               </div>
+            ))}
+          </div>
+
+          <div className="rise" style={{
+            marginTop: 24, padding: "24px 22px", borderRadius: 20,
+            background: T.surface, border: `1px solid ${T.border}`,
+          }}>
+            <div style={{ fontSize: 11, letterSpacing: 2.4, fontWeight: 800, color: T.muted, marginBottom: 6 }}>
+              MOBILE + AI CAPABILITIES
+            </div>
+            <div style={{ fontFamily: "Sora,sans-serif", fontSize: 20, fontWeight: 800, marginBottom: 18 }}>
+              Mobile products, backed by AI automation and LLM workflows
+            </div>
+            {PORTFOLIO_KEYWORDS.map((group) => (
+              <SkillGroup key={group.label} label={group.label} items={group.items} T={T} />
             ))}
           </div>
 
@@ -495,6 +530,48 @@ function ExperienceCard({ exp, T, index }) {
         </div>
       </div>
     </div>
+  );
+}
+
+function StoreBadges({ stores = [], T }) {
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: 6 }} aria-label="Store availability">
+      {stores.includes("appStore") && (
+        <span title="Available on the App Store" aria-label="App Store" style={{
+          width: 30, height: 30, borderRadius: 9, display: "grid", placeItems: "center",
+          background: T.bg, border: `1px solid ${T.border}`, color: T.text,
+        }}>
+          <AppleIcon />
+        </span>
+      )}
+      {stores.includes("googlePlay") && (
+        <span title="Available on Google Play" aria-label="Google Play" style={{
+          width: 30, height: 30, borderRadius: 9, display: "grid", placeItems: "center",
+          background: T.bg, border: `1px solid ${T.border}`, color: T.text,
+        }}>
+          <GooglePlayIcon />
+        </span>
+      )}
+    </div>
+  );
+}
+
+function AppleIcon() {
+  return (
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M16.7 12.6c0-2.4 2-3.6 2.1-3.7-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.6.9-.7 0-1.8-.9-3-.9-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 6.9 1.2 9.2.8 1.1 1.7 2.4 3 2.3 1.2-.1 1.7-.8 3.1-.8 1.5 0 1.9.8 3.2.8 1.3 0 2.1-1.2 2.9-2.3.9-1.3 1.3-2.6 1.3-2.7-.1 0-2.9-1.1-2.9-4.2ZM14.3 5.4c.6-.8 1.1-1.9 1-3-.9 0-2 .6-2.7 1.4-.6.7-1.1 1.8-1 2.9 1 .1 2-.5 2.7-1.3Z" />
+    </svg>
+  );
+}
+
+function GooglePlayIcon() {
+  return (
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M4.4 3.5 14.2 12 4.4 20.5c-.3-.4-.4-.9-.4-1.5V5c0-.6.1-1.1.4-1.5Z" fill="currentColor" opacity=".82" />
+      <path d="m14.2 12 2.9-2.5 3.5 2c.8.5.8 1.4 0 1.9l-3.5 2-2.9-3.4Z" fill="currentColor" />
+      <path d="M4.4 3.5c.5-.5 1.2-.6 1.9-.2l10.8 6.2-2.9 2.5-9.8-8.5Z" fill="currentColor" opacity=".62" />
+      <path d="m14.2 12 2.9 3.4-10.8 6.2c-.7.4-1.4.3-1.9-.2l9.8-9.4Z" fill="currentColor" opacity=".46" />
+    </svg>
   );
 }
 

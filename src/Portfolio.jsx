@@ -31,11 +31,13 @@ const PROFILE = {
 
 const FLUTTER_APPS = [
   {
-    icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/3d/35/db/3d35dbee-6d16-cfa1-0d15-692cc702da6b/AppIcon-0-0-1x_U007emarketing-0-11-0-85-220.png/512x512bb.jpg",
-    name: "Cleanie", tag: "Phone Storage Cleaner",
+    icon: `${B}experience/apps/cleanie/app-store/icon.jpg`,
+    name: "Cleanie", tag: "Cleanup Duplicate Photos, Junk",
+    developer: "GROC APPS S.L.", version: "3.0.1",
     stores: ["appStore", "googlePlay"],
-    url: "https://apps.apple.com/vn/app/cleanie-phone-storage-cleaner/id6511237599",
-    screenshots: [1,2,3,4].map(n => `${B}screenshots/cleanie/${n}.png`),
+    url: "https://apps.apple.com/us/app/cleanie-phone-storage-cleaner/id6511237599",
+    googlePlayUrl: "https://play.google.com/store/apps/details?id=com.grocapps.cleanerai",
+    screenshots: [1,2,3,4,5,6,7,8].map(n => `${B}experience/apps/cleanie/app-store/${String(n).padStart(2, "0")}.jpg`),
   },
   {
     icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/7a/11/a9/7a11a99f-4cf5-7d06-899e-110c963af427/AppIcon-0-0-1x_U007emarketing-0-11-0-85-220.png/512x512bb.jpg",
@@ -274,6 +276,11 @@ export default function Portfolio() {
                   <div style={{ flex: 1 }}>
                     <div style={{ fontWeight: 700, fontSize: 17 }}>{a.name}</div>
                     <div style={{ color: T.muted, fontSize: 13 }}>{a.tag}</div>
+                    {(a.developer || a.version) && (
+                      <div style={{ color: T.muted, opacity: .72, fontSize: 11, marginTop: 3 }}>
+                        {[a.developer, a.version ? `v${a.version}` : null].filter(Boolean).join(" · ")}
+                      </div>
+                    )}
                   </div>
                   <div style={{ display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}>
                     <StoreBadges stores={a.stores} T={T} />

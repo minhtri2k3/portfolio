@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef } from "react";
 
 // ============================================================
 // Portfolio — Split Reveal (Flutter Dev / AI Engineer)
@@ -37,17 +37,6 @@ const FLUTTER_APPS = [
     screenshots: [1,2,3,4].map(n => `${B}screenshots/cleanie/${n}.png`),
   },
   {
-    icon: "https://play-lh.googleusercontent.com/8D_T79UZv5-nXZORtNvJLyWFc7bianVgBm3Qwb4z6jaDmVY_LM3h7OUFN6iQ2XIam8_y3OEcnUIjJ5e4NGFi",
-    name: "Vietality", tag: "Health & fitness tracker",
-    url: "https://play.google.com/store/apps/details?id=com.vincentsoftware.vietality&hl=en",
-    screenshots: [
-      "https://play-lh.googleusercontent.com/MZu082wx2zhWfeajSb54wcflnhBe88VVOniT7O9bsRoE9WiKxSvBcLng4Syd3kvp26yIwGGeVxJdqx4JGmxFkJA",
-      "https://play-lh.googleusercontent.com/1PTcZbGxQbua6l7iHmBueDFyS1TuT0Oa5V-cIkJDvcz9fxQr_oiNk9tnCSPOkABzKAYd5hnuglJrvP9wPTtMYQ",
-      "https://play-lh.googleusercontent.com/4kX5KnFxuNmCIpx6Zt4RFjip_1eijOd6OYXulFk0411HTBb7ug8LqopW6JUricDl6-G41C6llNh3a5PZuCXM",
-      "https://play-lh.googleusercontent.com/Q1pU2rLkRFlp90_Gx-AXCrRgT5WBckvATimms-ULf7kWnRX0VvfX_UeCpc6ActhYwKmJEEvmbPNx_42eKl-U",
-    ],
-  },
-  {
     icon: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/7a/11/a9/7a11a99f-4cf5-7d06-899e-110c963af427/AppIcon-0-0-1x_U007emarketing-0-11-0-85-220.png/512x512bb.jpg",
     name: "Alobo", tag: "Sports facility manager",
     url: "https://apps.apple.com/us/app/alobo-qu%E1%BA%A3n-l%C3%BD-s%C3%A2n-th%E1%BB%83-thao/id6479625204",
@@ -64,6 +53,26 @@ const FLUTTER_APPS = [
     name: "Bửu Tòa Hoàng Cơ", tag: "Spiritual learning platform",
     url: "https://apps.apple.com/vn/app/b%E1%BB%ADu-t%C3%B2a-ho%C3%A0ng-c%C6%A1-nh%C6%B0-nhi%C3%AAn/id6736351145",
     screenshots: [`${B}screenshots/buu-toa-hoang-co/1.jpg`, `${B}screenshots/buu-toa-hoang-co/2.png`, `${B}screenshots/buu-toa-hoang-co/3.jpg`, `${B}screenshots/buu-toa-hoang-co/4.png`],
+  },
+  {
+    icon: "https://play-lh.googleusercontent.com/8D_T79UZv5-nXZORtNvJLyWFc7bianVgBm3Qwb4z6jaDmVY_LM3h7OUFN6iQ2XIam8_y3OEcnUIjJ5e4NGFi",
+    name: "Vietality", tag: "Health & fitness tracker",
+    url: "https://play.google.com/store/apps/details?id=com.vincentsoftware.vietality&hl=en",
+    screenshots: [
+      "https://play-lh.googleusercontent.com/MZu082wx2zhWfeajSb54wcflnhBe88VVOniT7O9bsRoE9WiKxSvBcLng4Syd3kvp26yIwGGeVxJdqx4JGmxFkJA",
+      "https://play-lh.googleusercontent.com/1PTcZbGxQbua6l7iHmBueDFyS1TuT0Oa5V-cIkJDvcz9fxQr_oiNk9tnCSPOkABzKAYd5hnuglJrvP9wPTtMYQ",
+      "https://play-lh.googleusercontent.com/4kX5KnFxuNmCIpx6Zt4RFjip_1eijOd6OYXulFk0411HTBb7ug8LqopW6JUricDl6-G41C6llNh3a5PZuCXM",
+      "https://play-lh.googleusercontent.com/Q1pU2rLkRFlp90_Gx-AXCrRgT5WBckvATimms-ULf7kWnRX0VvfX_UeCpc6ActhYwKmJEEvmbPNx_42eKl-U",
+    ],
+  },
+  {
+    icon: `${B}screenshots/youthconnect/icon.jpg`,
+    name: "YouthConnect", tag: "Youth community & connection platform",
+    url: "https://apps.apple.com/us/app/youthconnect/id6757994544",
+    screenshots: [
+      ...[1,2,3,4].map(n => `${B}screenshots/youthconnect/${n}.jpg`),
+      ...[1,2,3,4].map(n => `${B}screenshots/youthconnect/ipad-${n}.jpg`),
+    ],
   },
 ];
 
@@ -116,27 +125,18 @@ const MIX = "linear-gradient(135deg,#0A66C2 0%,#2E8BFF 50%,#00D4FF 100%)";
 
 export default function Portfolio() {
   const [theme, setTheme] = useState("light");
-  const [pos, setPos] = useState(50);
-  const [dragging, setDragging] = useState(false);
-  const stageRef = useRef(null);
   const topRef = useRef(null);
+  const flutterRef = useRef(null);
+  const aiRef = useRef(null);
 
   const isDark = theme === "dark";
   const T = isDark
     ? { bg: "#0B1220", surface: "#141C2E", text: "#F1F5FB", muted: "#94A3B8", border: "#243044" }
     : { bg: "#FFFFFF", surface: "#F4F7FB", text: "#0E1726", muted: "#5A6577", border: "#E2E8F0" };
 
-  const move = useCallback((clientX) => {
-    const el = stageRef.current;
-    if (!el) return;
-    const r = el.getBoundingClientRect();
-    const p = ((clientX - r.left) / r.width) * 100;
-    setPos(Math.max(8, Math.min(92, p)));
-  }, []);
-  const onDown = (e) => { setDragging(true); move(e.touches ? e.touches[0].clientX : e.clientX); };
-  const onMove = (e) => { if (dragging) move(e.touches ? e.touches[0].clientX : e.clientX); };
-  const onUp = () => setDragging(false);
   const scrollTop = () => topRef.current?.scrollIntoView({ behavior: "smooth" });
+  const scrollFlutter = () => flutterRef.current?.scrollIntoView({ behavior: "smooth" });
+  const scrollAI = () => aiRef.current?.scrollIntoView({ behavior: "smooth" });
 
   return (
     <div ref={topRef} style={{
@@ -243,18 +243,12 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* ===== LOWER: wipe stage ===== */}
-      <section
-        ref={stageRef}
-        onMouseMove={onMove} onMouseUp={onUp} onMouseLeave={onUp}
-        onTouchMove={onMove} onTouchEnd={onUp}
-        style={{ position: "relative", minHeight: "112vh", overflow: "hidden",
-          borderTop: `1px solid ${T.border}`, userSelect: dragging ? "none" : "auto" }}
-      >
-        <Panel side="left" pos={pos} dragging={dragging}>
+      {/* ===== PAGE 2: Flutter Applications ===== */}
+      <section ref={flutterRef} style={{ background: T.bg, borderTop: `1px solid ${T.border}` }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "80px 24px 96px" }}>
           <Hero grad={BLUE} kicker="FLUTTER DEVELOPER" title="I build" highlight="mobile apps"
-            sub="Shipping clean, fast Flutter apps to the App Store." />
-          <h3 style={h3(T)}>On the App Store</h3>
+            sub="Shipping clean, fast Flutter apps to the App Store and Google Play." />
+          <h3 style={h3(T)}>Published applications</h3>
           <div style={{ display: "grid", gap: 16 }}>
             {FLUTTER_APPS.map((a, i) => (
               <div key={a.name} className="card rise" style={{ ...cardStyle(T), animationDelay: `${.1 + i * .08}s` }}>
@@ -267,42 +261,48 @@ export default function Portfolio() {
                   <a href={a.url} target="_blank" rel="noreferrer" style={cta(BLUE)}>Get</a>
                 </div>
                 <div style={{ display: "flex", gap: 10, marginTop: 14, overflowX: "auto", paddingBottom: 4 }}>
-                  {a.screenshots.length > 0
-                    ? a.screenshots.map((src, s) => (
-                        <img key={s} src={src} alt={`${a.name} screenshot ${s + 1}`} className="shot"
-                          style={{ minWidth: 84, height: 168, borderRadius: 16, flexShrink: 0, objectFit: "cover" }} />
-                      ))
-                    : Array.from({ length: 4 }).map((_, s) => (
-                        <div key={s} className="shot" style={{ minWidth: 84, height: 168, borderRadius: 16, flexShrink: 0,
-                          background: `linear-gradient(160deg,${T.surface},${isDark ? "#1d2942" : "#dfeaff"})`,
-                          border: `1px solid ${T.border}` }} />
-                      ))
-                  }
+                  {a.screenshots.map((src, s) => (
+                    <img key={s} src={src} alt={`${a.name} screenshot ${s + 1}`} className="shot"
+                      style={{ minWidth: 84, height: 168, borderRadius: 16, flexShrink: 0, objectFit: "cover" }} />
+                  ))}
                 </div>
               </div>
             ))}
           </div>
-          <div style={{ marginTop: 40, marginBottom: 50 }}>
+
+          <div style={{ marginTop: 40 }}>
             <SkillGroup label="STATE MANAGEMENT" items={["Riverpod", "Provider", "Bloc", "MobX", "GetX"]} T={T} />
             <SkillGroup label="FIREBASE" items={["Authentication", "Firestore", "Realtime Database", "Cloud Storage", "Cloud Messaging", "Crashlytics", "Analytics", "Remote Config", "Cloud Functions", "Performance Monitoring"]} T={T} />
             <SkillGroup label="PROTOCOLS" items={["REST API", "WebSocket", "Socket.IO", "SSE"]} T={T} />
           </div>
-        </Panel>
 
-        <Panel side="right" pos={pos} dragging={dragging}>
-          <Hero grad={BLUE_ALT} align="right" kicker="AI ENGINEER" title="I build" highlight="intelligent systems"
+          <div style={{ display: "flex", justifyContent: "center", marginTop: 56 }}>
+            <button onClick={scrollAI} className="toplink" style={{
+              border: "none", borderRadius: 999, padding: "14px 24px", cursor: "pointer",
+              color: "#fff", background: BLUE_ALT, fontWeight: 800, fontSize: 15,
+              boxShadow: "0 12px 30px rgba(46,139,255,.28)", display: "flex", alignItems: "center", gap: 10,
+            }}>
+              <AgentIcon /> Explore AI Projects →
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== PAGE 3: AI Projects ===== */}
+      <section ref={aiRef} style={{ background: T.surface, borderTop: `1px solid ${T.border}` }}>
+        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "80px 24px 96px" }}>
+          <Hero grad={BLUE_ALT} kicker="AI ENGINEER" title="I build" highlight="intelligent systems"
             sub="ML & LLM pipelines that turn data into product." />
-          <h3 style={{ ...h3(T), textAlign: "right" }}>Selected work</h3>
+          <h3 style={h3(T)}>Selected AI work</h3>
           <div style={{ display: "grid", gap: 16 }}>
             {AI_PROJECTS.map((p, i) => (
-              <div key={p.name} className="card rise" style={{ ...cardStyle(T), animationDelay: `${.1 + i * .08}s`, textAlign: "right",
-                boxShadow: "none" }}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-                  <span style={pill(BLUE_ALT)}>{p.tag}</span>
+              <div key={p.name} className="card rise" style={{ ...cardStyle(T), animationDelay: `${.1 + i * .08}s`, boxShadow: "none" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: 16, flexWrap: "wrap" }}>
                   <span style={{ fontWeight: 700, fontSize: 17 }}>{p.name}</span>
+                  <span style={pill(BLUE_ALT)}>{p.tag}</span>
                 </div>
-                <p style={{ color: T.muted, fontSize: 14, margin: "10px 0" }}>{p.desc}</p>
-                <div style={{ display: "flex", gap: 8, justifyContent: "flex-end", flexWrap: "wrap" }}>
+                <p style={{ color: T.muted, fontSize: 14, lineHeight: 1.7, margin: "12px 0" }}>{p.desc}</p>
+                <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
                   {p.stack.map((s) => (
                     <span key={s} style={{ fontSize: 12, padding: "4px 10px", borderRadius: 999,
                       border: `1px solid ${T.border}`, color: T.muted }}>{s}</span>
@@ -311,37 +311,21 @@ export default function Portfolio() {
               </div>
             ))}
           </div>
-          <SkillRow align="right" items={["Python", "PyTorch", "LangChain", "FastAPI"]} T={T} />
-        </Panel>
-
-        <div style={{ position: "absolute", top: 0, bottom: 0, left: `${pos}%`, width: 2, background: MIX,
-          transform: "translateX(-50%)", zIndex: 40, boxShadow: "0 0 24px 4px rgba(46,139,255,.55)",
-          transition: dragging ? "none" : "left .5s cubic-bezier(.65,0,.35,1)" }} />
-        <div onMouseDown={onDown} onTouchStart={onDown} style={{
-          position: "absolute", top: "50%", left: `${pos}%`, zIndex: 50, transform: "translate(-50%,-50%)",
-          width: 72, height: 72, borderRadius: "50%", cursor: "grab", overflow: "hidden",
-          display: "flex", border: "3px solid #fff",
-          animation: "pulseGlow 2.4s ease-in-out infinite",
-          boxShadow: "0 8px 24px rgba(46,139,255,.4)",
-          transition: dragging ? "none" : "left .5s cubic-bezier(.65,0,.35,1)" }}>
-          {/* left half — Flutter */}
-          <div style={{ flex: 1, background: BLUE, display: "grid", placeItems: "center", paddingRight: 4 }}>
-            <FlutterIcon />
-          </div>
-          {/* right half — AI agent */}
-          <div style={{ flex: 1, background: BLUE_ALT, display: "grid", placeItems: "center", paddingLeft: 4 }}>
-            <AgentIcon />
-          </div>
+          <SkillRow items={["Python", "PyTorch", "LangChain", "FastAPI"]} T={T} />
+          <button onClick={scrollFlutter} className="toplink" style={{
+            border: `1px solid ${T.border}`, borderRadius: 999, padding: "12px 20px", cursor: "pointer",
+            color: T.text, background: T.bg, fontWeight: 700, fontSize: 14,
+          }}>← Back to Flutter Projects</button>
         </div>
-
-        {/* back-to-top navigator */}
-        <button onClick={scrollTop} className="toplink" title="Back to intro" style={{
-          position: "fixed", bottom: 28, right: 28, zIndex: 70, width: 52, height: 52,
-          borderRadius: "50%", border: "none", cursor: "pointer", color: "#fff",
-          background: MIX, fontSize: 22, boxShadow: "0 10px 26px rgba(46,139,255,.4)" }}>↑</button>
       </section>
 
-      {/* ===== PAGE 3: Experience ===== */}
+      {/* back-to-top navigator */}
+      <button onClick={scrollTop} className="toplink" title="Back to intro" style={{
+        position: "fixed", bottom: 28, right: 28, zIndex: 70, width: 52, height: 52,
+        borderRadius: "50%", border: "none", cursor: "pointer", color: "#fff",
+        background: MIX, fontSize: 22, boxShadow: "0 10px 26px rgba(46,139,255,.4)" }}>↑</button>
+
+      {/* ===== PAGE 4: Experience ===== */}
       <section style={{ background: T.bg, borderTop: `1px solid ${T.border}` }}>
         <div style={{ maxWidth: 1100, margin: "0 auto", padding: "80px 24px 96px" }}>
           <div className="rise" style={{ textAlign: "center", marginBottom: 60 }}>

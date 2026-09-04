@@ -101,6 +101,15 @@ const AI_PROJECTS = [
 
 const EXPERIENCE = [
   {
+    company: "Vincent Holding",
+    location: "Ho Chi Minh City, Vietnam",
+    role: "Middle Mobile Developer",
+    desc: "US-focused outsourcing company. Responsible for full-stack outsourced development and end-to-end mobile production ownership — building applications, managing production delivery, and publishing directly to both Google Play and the App Store.",
+    tags: ["Fintech", "Flutter", "Dart", "LLMs", "Product Owner"],
+    cover: `${B}experience/vincent/cover.jpg`,
+    accent: "#0B2A5B",
+  },
+  {
     company: "Carrots",
     location: "Barcelona, Spain",
     role: "Project Owner · Junior Developer",

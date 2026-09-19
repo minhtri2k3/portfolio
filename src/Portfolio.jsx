@@ -16,14 +16,10 @@ const PROFILE = {
   age: 23,
   education: "International University – HCMIU",
   major: "Information Technology",
-  talent: [
-    { num: "6", label: "apps on Store" },
-    { num: "5", label: "years university" },
-    { num: "4", label: "international companies" },
-    { num: "3", label: "years of experience" },
-    { num: "2", label: "MVPs built" },
-    { num: "1", label: "rule: never quit once started" },
-    { num: "0", label: "things impossible" },
+  stats: [
+    { num: "3+", label: "Years Experience" },
+    { num: "4", label: "Companies" },
+    { num: "6", label: "Projects" },
   ],
   linkedin: "https://www.linkedin.com/in/quang-minh-tri-nguyen-a4a942275/",
   email: "quangminhtri2003@gmail.com",
@@ -124,7 +120,7 @@ const EXPERIENCE = [
     role: "Junior Developer",
     desc: "Vietnamese sports facility booking platform with 300,000+ users across Vietnam. Worked under high pressure with 2-week Agile sprints and demanding Story Point targets.",
     tags: ["Flutter", "Dart", "Agile", "Scrum", "Firebase", "GoogleMaps"],
-    cover: `${B}experience/alobo/cover.jpg`,
+    cover: null,
     accent: "#22C55E",
   },
   {
@@ -247,19 +243,33 @@ export default function Portfolio() {
             </a>
           </div>
 
-          {/* Talent 5..0 */}
-          <div style={{ marginTop: 8 }}>
-            <div style={{ fontSize: 18, letterSpacing: 3, fontWeight: 600, color: T.muted, marginBottom: 14 }}>
-              TALENT IN NUMBERS
-            </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 18, maxWidth: 560 }}>
-              {PROFILE.talent.map((t, i) => (
-                <div key={i} style={{ animation: `countPop .6s ease both`, animationDelay: `${.3 + i * .12}s` }}>
-                  <div style={{ fontFamily: "Sora,sans-serif", fontSize: 60, fontWeight: 800,
-                    background: MIX, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-                    {t.num}
+          {/* Career highlights */}
+          <div style={{ marginTop: 8, width: "100%", maxWidth: 680 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: 14 }}>
+              {PROFILE.stats.map((stat, i) => (
+                <div key={stat.label} style={{
+                  padding: "20px 16px",
+                  borderRadius: 18,
+                  border: `1px solid ${T.border}`,
+                  background: T.surface,
+                  boxShadow: "0 10px 30px rgba(46,139,255,.08)",
+                  animation: "countPop .6s ease both",
+                  animationDelay: `${.3 + i * .12}s`,
+                }}>
+                  <div style={{
+                    fontFamily: "Sora,sans-serif",
+                    fontSize: 42,
+                    lineHeight: 1,
+                    fontWeight: 800,
+                    background: MIX,
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                  }}>
+                    {stat.num}
                   </div>
-                  <div style={{ fontSize: 18, color: T.muted, maxWidth: 150, margin: "0 auto" }}>{t.label}</div>
+                  <div style={{ marginTop: 10, fontSize: 15, fontWeight: 700, color: T.text }}>
+                    {stat.label}
+                  </div>
                 </div>
               ))}
             </div>
@@ -501,9 +511,11 @@ function ExperienceCard({ exp, T, index }) {
         background: `linear-gradient(135deg, ${exp.accent}44 0%, ${exp.accent}11 100%)`,
         minHeight: 280,
       }}>
-        <img src={exp.cover} alt={exp.company}
-          onError={(e) => { e.currentTarget.style.display = "none"; }}
-          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+        {exp.cover && (
+          <img src={exp.cover} alt={exp.company}
+            onError={(e) => { e.currentTarget.style.display = "none"; }}
+            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+        )}
         <div style={{
           position: "absolute", inset: 0,
           background: `linear-gradient(135deg, ${exp.accent}33 0%, transparent 60%)`,
